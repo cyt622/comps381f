@@ -521,7 +521,7 @@ app.get('/display', (req,res) => {
   });
 });
   
-app.delete('/delete/:_id', (req, res) => {
+app.get('/delete/:_id', (req, res) => {
   if (!req.session.authenticated) {
     res.redirect('/login');
   }
@@ -547,7 +547,7 @@ app.delete('/delete/:_id', (req, res) => {
       
       try {
         assert(restaurant.owner, req.session.userid);
-        db.collection('restaurant').remove(
+        db.collection('restaurant').deleteOne(
           criteria,
           (err, result) => {
             assert.equal(err,null);
