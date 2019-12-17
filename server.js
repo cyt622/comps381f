@@ -613,10 +613,10 @@ app.post('/adv_search', (req, res) => {
     console.log('Connected to MongoDB');
     const db = client.db(dbName);
     let temp = {
-      'name': (req.body.name ? req.body.name : null),
-      'borough': (req.body.borough ? req.body.borough : null),
-      'cuisine': (req.body.cuisine ? req.body.cuisine : null),
-      'owner': (req.body.owner ? req.body.owner : null)
+      'name': (req.body.name ? ('/' + req.body.name + '/') : null),
+      'borough': (req.body.borough ? ('/' + req.body.borough + '/') : null),
+      'cuisine': (req.body.cuisine ? ('/' + req.body.cuisine + '/') : null),
+      'owner': (req.body.owner ? ('/' + req.body.owner + '/') : null)
       
       
     };
@@ -689,7 +689,10 @@ app.get('/api/restaurant/borough/:borough', function(req, res) {
     findRestaurant(db, criteria, (results) => {
       client.close();
       console.log('Disconnected MongoDB');
-      res.status(200).render("list", {userid:req.session.userid, results:results});
+      if (results.length == 0) {
+        results = [];
+      }
+      res.status(200).type('json').json(results).end();
     });
   });
 });
@@ -711,7 +714,10 @@ app.get('/api/restaurant/cuisine/:cuisine', function(req, res) {
     findRestaurant(db, criteria, (results) => {
       client.close();
       console.log('Disconnected MongoDB');
-      res.status(200).render("list", {userid:req.session.userid, results:results});
+      if (results.length == 0) {
+        results = [];
+      }
+      res.status(200).type('json').json(results).end();
     });
   });
 });
