@@ -90,6 +90,7 @@
           clear: right;
           padding-left: 1em;
           padding-top: 0.7em;
+          overflow: auto;
       }
       
     </style>
@@ -194,8 +195,10 @@
 
       <div class="mt-3">
         <a href="/rate/<%= restaurant._id %>" class="btn btn-info" role="button">Rate</a>
+        <% if (restaurant.owner == userid) { %>
         <a href="/update/<%= restaurant._id %>" class="btn btn-info" role="button">Update</a>
         <a href="/delete/<%= restaurant._id %>" class="btn btn-info" role="button">Delete</a>
+        <% } %>
       </div>
     </div>
 
