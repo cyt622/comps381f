@@ -301,7 +301,7 @@ app.get('/update/:_id', (req, res) => {
 });
   
 app.post('/update/:_id', function(req, res) {
-  if (req.session.authenticated) {
+  if (!req.session.authenticated) {
     res.redirect('/');
   }
 	console.log('Incoming request: ' + req.method);
