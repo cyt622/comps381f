@@ -613,10 +613,10 @@ app.post('/adv_search', (req, res) => {
     console.log('Connected to MongoDB');
     const db = client.db(dbName);
     let temp = {
-      'name': (req.body.name ? ('/' + req.body.name + '/') : null),
-      'borough': (req.body.borough ? ('/' + req.body.borough + '/') : null),
-      'cuisine': (req.body.cuisine ? ('/' + req.body.cuisine + '/') : null),
-      'owner': (req.body.owner ? ('/' + req.body.owner + '/') : null)
+      'name': req.body.name,
+      'borough': req.body.borough,
+      'cuisine': req.body.cuisine,
+      'owner': req.body.owner
       
       
     };
