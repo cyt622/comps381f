@@ -540,23 +540,19 @@ app.get('/delete/:_id', (req, res) => {
       console.log(JSON.stringify(criteria));
       console.log(JSON.stringify(restaurant));
       
-      try {
-        assert(restaurant.owner, req.session.userid);
-        db.collection('restaurant').deleteOne(
-          criteria,
-          (err, result) => {
-            assert.equal(err,null);
 
-            console.log("Deleted successfully!");
-            console.log(JSON.stringify(result));
-            client.close();
-            console.log('Disconnected MongoDB');
-            res.redirect('/');
-          }
-        );
-      } catch (e) {
-        res.redirect('/');
-      }
+      db.collection('restaurant').deleteOne(
+        criteria,
+        (err, result) => {
+          assert.equal(err,null);
+
+          console.log("Deleted successfully!");
+          console.log(JSON.stringify(result));
+          client.close();
+          console.log('Disconnected MongoDB');
+          res.redirect('/');
+        }
+      );
       
       
     });
