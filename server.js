@@ -533,6 +533,20 @@ app.get('/delete/:_id', (req, res) => {
       '_id' : ObjectID(req.params._id)
     };
     console.log(JSON.stringify(criteria));
+    db.collection('restaurant').deleteOne(
+      criteria,
+      (err, result) => {
+        assert.equal(err,null);
+
+        console.log("Deleted successfully!");
+        console.log(JSON.stringify(result));
+        client.close();
+        console.log('Disconnected MongoDB');
+        res.redirect('/');
+      }
+    );
+	  
+    /*
     findRestaurant(db, criteria, (restaurant) => {
       client.close();
       console.log('Disconnected MongoDB');
@@ -556,6 +570,7 @@ app.get('/delete/:_id', (req, res) => {
       
       
     });
+    */
   });
 });
 
