@@ -292,12 +292,7 @@ app.get('/update/:_id', (req, res) => {
       console.log(JSON.stringify(criteria));
       console.log(JSON.stringify(doc));
       
-      try {
-        assert(doc.owner, req.session.userid);
-        res.status(200).render("update", {userid:req.session.userid, restaurant: doc});
-      } catch (e) {
-        res.redirect('/');
-      }
+      res.status(200).render("update", {userid:req.session.userid, restaurant: doc});
       
       
       
@@ -347,7 +342,7 @@ app.post('/update/:_id', function(req, res) {
         });
       });
     }
-    else {
+    else if (files.photo.size > 0) {
       let filename = files.photo.path;
       if (files.photo.type) {
         var mimetype = files.photo.type;
